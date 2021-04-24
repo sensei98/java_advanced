@@ -24,6 +24,7 @@ public class gamesController {
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Games>> getGames(){
+
         return ResponseEntity.status(200).body(service.getGames());
     }
 

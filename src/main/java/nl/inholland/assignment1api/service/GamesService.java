@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class GamesService {
@@ -28,4 +29,25 @@ public class GamesService {
     public List<Games> getGames() {
         return games;
     }
+
+
+    public List<Games> updateGames(Games newGame){
+        for(Games game: games){
+
+            game.setName(newGame.getName());
+            game.setPrice(newGame.getPrice());
+            game.setType(newGame.getType());
+        }
+        games.add(newGame);
+        return games;
+    }
+    public  List<Games> deletegames(Games game){
+        for(Games x: games ){
+            if(x.getUuid() == game.getUuid()){
+                games.remove(x);
+            }
+        }
+        return games;
+    }
+
 }
