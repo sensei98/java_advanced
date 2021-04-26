@@ -3,7 +3,7 @@ package nl.inholland.myfirstapi.controller;
 
 import nl.inholland.myfirstapi.model.Guitar;
 import nl.inholland.myfirstapi.service.GuitarService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,22 +16,32 @@ import java.util.List;
 @RequestMapping(value = "guitars")
 public class GuitarController {
 
-    @Autowired
+//    @Autowired
     private GuitarService service;
 
+    public GuitarController(GuitarService service){ //constructor
+        this.service = service;
+    }
+
     @RequestMapping(value="" ,method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Guitar>> getGuitars(){
-        return ResponseEntity.status(200).body(service.getGuitars());
+    public ResponseEntity<List<Guitar>> getGuitars(){ //newly added
+        return new ResponseEntity<>(service.getGuitars(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Guitar> createGuitar (@RequestBody Guitar guitar){
-        service.createGuitars(guitar);
-        return ResponseEntity.status(201).body(guitar);
+    public ResponseEntity<Guitar> createGuitar (@RequestBody Guitar guitar){ //newly addded
+        service.addGuitars(guitar);
+        return new ResponseEntity<>(guitar,HttpStatus.CREATED);
     }
     //newly added
-    @GetMapping(value="/{id}")
-    public Guitar getGuitarById(@PathVariable long id){
-        return service.getGuitarById(id);
+    @RequestMapping(value="{id}" ,method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE) ///modified
+    public ResponseEntity<Guitar> getGuitarById(@PathVariable long id){
+        return new ResponseEntity<Guitar>(service.getGuitarById(id),HttpStatus.OK);
     }
+
+    @RequestMapping(value ="brand", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)//newly added
+    public ResponseEntity<List<Guitar>> getGuitarsByBrand(@RequestParam String name){
+        return new ResponseEntity<List<Guitar>>((List<Guitar>) service.getGuitarsByBrand(name),HttpStatus.OK);
+    }
+
 }
