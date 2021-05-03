@@ -14,10 +14,10 @@ public class GamesService {
     public GamesService() {
         this.games = new ArrayList<>(
                 List.of(
-                        new Games("FIFA20","football",90.00),
-                        new Games("Call of duty","action",50.80),
-                        new Games("Formula 1","racing",90.90),
-                        new Games("NBA","basketball",40.90)
+                        new Games("FIFA20","football",90),
+                        new Games("Call of duty","action",50),
+                        new Games("Formula 1","racing",90),
+                        new Games("NBA","basketball",40)
                 )
         );
     }
@@ -31,23 +31,23 @@ public class GamesService {
     }
 
 
-    public List<Games> updateGames(Games newGame){
-        for(Games game: games){
-
-            game.setName(newGame.getName());
-            game.setPrice(newGame.getPrice());
-            game.setType(newGame.getType());
-        }
-        games.add(newGame);
-        return games;
-    }
-    public  List<Games> deletegames(Games game){
-        for(Games x: games ){
-            if(x.getUuid() == game.getUuid()){
-                games.remove(x);
-            }
-        }
-        return games;
-    }
+//    public List<Games> updateGames(Games newGame){
+//        for(Games game: games){
+//
+//            game.setName(newGame.getName());
+//            game.setPrice(newGame.getPrice());
+//            game.setType(newGame.getType());
+//        }
+//        games.add(newGame);
+//        return games;
+//    }
+//    public  List<Games> deletegames(Games game){
+//        for(Games x: games ){
+//            if(x.getUuid() == game.getUuid()){
+//                games.remove(x);
+//            }
+//        }
+//        return games;
+//    }
 
 }

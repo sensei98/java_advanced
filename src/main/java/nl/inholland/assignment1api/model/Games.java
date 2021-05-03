@@ -6,9 +6,9 @@ public class Games {
     private UUID uuid;
     private String name;
     private String type;
-    private Double price;
+    private int price;
 
-    public Games(String name, String type, Double price) {
+    public Games(String name, String type, int price) {
         this.uuid = uuid.randomUUID();
         this.name = name;
         this.type = type;
@@ -35,11 +35,11 @@ public class Games {
         this.type = type;
     }
 
-    public Double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
