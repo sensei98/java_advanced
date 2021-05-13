@@ -1,19 +1,22 @@
 package nl.inholland.myfirstapi;
 
-import nl.inholland.myfirstapi.model.Brand;
-import nl.inholland.myfirstapi.model.Guitar;
-import nl.inholland.myfirstapi.model.Stock;
+import lombok.extern.java.Log;
+import nl.inholland.myfirstapi.model.*;
 import nl.inholland.myfirstapi.service.BrandService;
 import nl.inholland.myfirstapi.service.GuitarService;
 import nl.inholland.myfirstapi.service.StockService;
+import nl.inholland.myfirstapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 
+@Log
 @Component
 public class GuitarShopApplicationRunner implements ApplicationRunner {
 
@@ -23,11 +26,26 @@ public class GuitarShopApplicationRunner implements ApplicationRunner {
     private StockService stockService;
     @Autowired
     private BrandService brandService;
+    @Autowired
+    private UserService userService;
 
     @Override
     @Transactional
     public void run(ApplicationArguments args) throws Exception {
 
+
+        //for user
+        User user = new User();
+        user.setUsername("test-user");
+        user.setPassword("testpassword");
+        user.setRoles(List.of(Role.ROLE_USER));
+        String token = userService.add(user.getUsername(), user.getPassword(),user.getRoles());
+        log.info("Token: " + token);
+
+
+
+
+        ///guitars
         Brand fender = new Brand("Fender");
         Brand gibson = new Brand("Gibson");
 

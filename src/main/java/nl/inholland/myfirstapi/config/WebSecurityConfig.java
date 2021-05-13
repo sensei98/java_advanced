@@ -27,7 +27,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.authorizeRequests()
-                .antMatchers("users/login").permitAll() //allowing some urls for authenticated users
+                .antMatchers("/users/login").permitAll() //allowing some urls for authenticated users
+                .antMatchers("/users/add").permitAll() //allowing some urls for authenticated users
                 .antMatchers("/h2-console/**/**").permitAll()
                 .anyRequest().authenticated(); //disallow any other URL for authenticated users
 
